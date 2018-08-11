@@ -1,0 +1,49 @@
+{
+    "name": "hachetaustralia/smsbroadcast",
+    "description": "SMS Broadcast notification channel for Laravel 5.4, 5.5 and 5.6",
+    "homepage": "https://github.com/hachetaustralia/smsbroadcast",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matt Hare",
+            "email": "matt@hachet.com.au",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "illuminate/notifications": ">=5.4",
+        "illuminate/support": ">=5.4",
+        "illuminate/queue": ">=5.4",
+        "illuminate/events": ">=5.4",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "require-dev": {
+        "mockery/mockery": "0.9.*",
+        "phpunit/phpunit": "~7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "NotificationChannels\\SMSBroadcast\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NotificationChannels\\SMSBroadcast\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "NotificationChannels\\SMSBroadcast\\SMSBroadcastServiceProvider"
+            ]
+        }
+    }
+}
