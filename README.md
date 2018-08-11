@@ -55,6 +55,7 @@ Add the environment variables to your `config/services.php`:
     'username' => env('SMSBROADCAST_USERNAME'),
     'password' => env('SMSBROADCAST_PASSWORD'),
     'from' => env('SMSBROADCAST_FROM'),
+    'sandbox' => env('SMSBROADCAST_SANDBOX'),
 ],
 ...
 ```
@@ -67,11 +68,12 @@ Add your SMS Broadcast username and password as well as the default from number/
 SMSBROADCAST_USERNAME=
 SMSBROADCAST_PASSWORD=
 SMSBROADCAST_FROM=
+SMSBROADCAST_SANDBOX=false
 ],
 ...
 ```
 
-Notice: The from can contain a maximum of 11 alphanumeric characters.
+Notice: The from can contain a maximum of 11 alphanumeric characters. You can also specify sandbox to true for testing (no post requests are made).
 
 Setup your route on your `notifiable` model such as your User with the default destination for that model (single number or array of numbers).
 
@@ -156,6 +158,12 @@ You can also delay message sending by a specified number of minutes
 
 ``` php
 return (new SMSBroadcastMessage("Your {$notifiable->service} is ready to go!"))->setDelay(10);
+```
+
+Setting a private reference will not transmit to SMS Broadcast and be available should you need it on the `MessageWasSent` event as a property of the `SMSBroadcastMessage`. This is useful if you want to set something like a foreign key that you can utilise on a listener listening to the `MessageWasSent` event.
+
+``` php
+return (new SMSBroadcastMessage("Your {$notifiable->service} is ready to go!"))->setPrivateReference(12345);
 ```
 
 ### Available events

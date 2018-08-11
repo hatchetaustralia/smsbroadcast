@@ -10,6 +10,7 @@ class SMSBroadcastMessage
     public $reference;
     public $maxSplit;
     public $delay;
+    public $privateReference;
 
     /**
      * Create a new instance statically
@@ -78,7 +79,7 @@ class SMSBroadcastMessage
     }
 
     /**
-     * Set a reference for the message
+     * Set a reference for the message which will transmit to SMS Broadcast
      *
      * @param string $reference
      * @return void
@@ -86,6 +87,19 @@ class SMSBroadcastMessage
     public function setReference($reference)
     {
         $this->reference = substr($reference, 0, 20);
+
+        return $this;
+    }
+
+    /**
+     * Set a private reference for the message that will not transmit to SMS Broadcast and can be used internally on events
+     *
+     * @param string $reference
+     * @return void
+     */
+    public function setPrivateReference(string $privateReference)
+    {
+        $this->privateReference = (string)$privateReference;
 
         return $this;
     }

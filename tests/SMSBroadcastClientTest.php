@@ -13,7 +13,7 @@ class SMSBroadcastClientTest extends TestCase
     public function setUp()
     {
         $this->guzzle = Mockery::mock(new Client());
-        $this->client = Mockery::mock(new SMSBroadcastClient($this->guzzle, 'username', 'password'));
+        $this->client = Mockery::mock(new SMSBroadcastClient($this->guzzle, 'username', 'password', true));
         $this->message = (new SMSBroadcastMessage('Message content'))->setFrom('APPNAME')->setRecipients('0411111111')->setReference('000123');
     }
 

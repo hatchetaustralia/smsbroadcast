@@ -19,7 +19,7 @@ class SMSBroadcastChannelTest extends TestCase
         $this->string_notification = new TestStringNotification;
         $this->notifiable = new TestNotifiable;
         $this->guzzle = Mockery::mock(new Client());
-        $this->client = Mockery::mock(new SMSBroadcastClient($this->guzzle, 'username', 'password'));
+        $this->client = Mockery::mock(new SMSBroadcastClient($this->guzzle, 'username', 'password', true));
         $this->channel = new SMSBroadcastChannel($this->client);
     }
 

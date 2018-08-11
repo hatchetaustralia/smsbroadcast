@@ -7,11 +7,11 @@ use Exception;
 class CouldNotSendNotification extends Exception
 {
     /**
-     * @param Exception $exception
+     * @param string $exception
      * @return static
      */
-    public static function serviceRespondedWithAnError(Exception $exception)
+    public static function serviceRespondedWithAnError($exception)
     {
-        return new static("SMS Broadcast service responded with an error '{$exception->getCode()}: {$exception->getMessage()}'");
+        return new static("SMS Broadcast service responded with an error: {$exception}'");
     }
 }

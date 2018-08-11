@@ -14,6 +14,7 @@ class SMSBroadcastClient
     protected $username;
     protected $password;
     private $afterSendCallback;
+    protected $mock;
 
     /**
      * SMSBroadcastClient constructor.
@@ -23,12 +24,13 @@ class SMSBroadcastClient
      * @param $password string password for SMS Broadcast
      * @param  callable|null                          $afterSendCallback
      */
-    public function __construct(Client $client, $username, $password, $afterSendCallback = null)
+    public function __construct(Client $client, $username, $password, $afterSendCallback = null, $mock = false)
     {
         $this->client = $client;
         $this->username = $username;
         $this->password = $password;
         $this->afterSendCallback = $afterSendCallback;
+        $this->mock = $mock;
     }
 
     /**
@@ -69,17 +71,42 @@ class SMSBroadcastClient
             }
 
             // Send the post request
-            $response = $this->client->request('POST', 'https://api.smsbroadcast.com.au/api-adv.php', [
-                'form_params' => $params,
-            ]);
+            if (!$this->mock) {
+                $response = $this->client->request('POST', 'https://api.smsbroadcast.com.au/api-adv.php', [
+                    'form_params' => $params,
+                ]);
+            }
         } catch (Exception $exception) {
-            throw CouldNotSendNotification::serviceRespondedWithAnError($exception);
+            throw CouldNotSendNotification::serviceRespondedWithAnError($exception->getMessage());
         }
 
-        //dd($response);
+        // Check for an error in the response
+        if (!$this->mock) {
+            $response = (string)$response->getBody();
+        } else {
+            $recipients = explode(',', $message->recipients);
+            $response = "";
+            foreach ($recipients as $recipient) {
+                $response .= "OK:" . $recipient . ":" . "12345" . rand(100000, 999999) . "\n";
+            }
+        }
 
-        // Parse the response
-        $responseData = ['meow'];
+        // Break up the response lines
+        $responseLines = explode("\n", $response);
+        $responseData = [];
+        foreach( $responseLines as $line) {
+            $msgData = "";
+            $msgData = explode(':', $line);
+            if($msgData[0] == "OK" || $msgData[0] == "BAD") {
+                $responseData[] = [
+                    'to' => $msgData[1],
+                    'status' => $msgData[0],
+                    'code' => $msgData[2],
+                ];
+            } else if( $msgData[0] == "ERROR" ) {
+                throw CouldNotSendNotification::serviceRespondedWithAnError($msgData[1]);
+            }
+        }
 
         // Call the event
         if (is_callable($this->afterSendCallback)) {

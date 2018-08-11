@@ -22,11 +22,11 @@ class SMSBroadcastServiceProvider extends ServiceProvider
                     throw InvalidConfiguration::configurationNotSet();
                 }
 
-                $afterSendCallback = function (array $response, SMSBroadcastMessage $message) {
-                    event(new Events\MessageWasSent($shortMessage, $response));
+                $afterSendCallback = function (SMSBroadcastMessage $message, array $response) {
+                    event(new Events\MessageWasSent($message, $response));
                 };
 
-                return new SMSBroadcastClient(new Client(), $config['username'], $config['password'], $afterSendCallback);
+                return new SMSBroadcastClient(new Client(), $config['username'], $config['password'], $afterSendCallback, $config['sandbox'] ?? false);
             });
     }
 }
