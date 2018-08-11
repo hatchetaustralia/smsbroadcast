@@ -58,7 +58,7 @@ class SMSBroadcastClient
                 'password' => $this->password,
                 'to' => $message->recipients,
                 'from' => $message->from,
-                'message' => urlencode($message->body),
+                'message' => $message->body,
                 'maxsplit' => $message->maxSplit,
             ];
 
