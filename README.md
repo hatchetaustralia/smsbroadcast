@@ -166,6 +166,12 @@ Setting a private reference will not transmit to SMS Broadcast and be available 
 return (new SMSBroadcastMessage("Your {$notifiable->service} is ready to go!"))->setPrivateReference(12345);
 ```
 
+If you wish to use SMS Broadcast's default two-way SMS number as the from number, simply `setNoFrom()` on the message instance
+
+``` php
+return (new SMSBroadcastMessage("Your {$notifiable->service} is ready to go!"))->setNoFrom();
+```
+
 ### Available events
 
 SMS Broadcast Notification channel comes with handy events which provides the required information about the SMS messages.
