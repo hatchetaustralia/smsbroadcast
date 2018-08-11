@@ -227,8 +227,4 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## License
 
-<<<<<<< HEAD
 The `NoHarm` Licence. Please see [License File](LICENSE.md) for more information.
-=======
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
->>>>>>> 3e4067912060b47a570815438939a75be467b44b
