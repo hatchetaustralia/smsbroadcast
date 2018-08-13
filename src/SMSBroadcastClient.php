@@ -81,7 +81,7 @@ class SMSBroadcastClient
             }
 
             if ($message->reference) {
-                $params['reference'] = $message->reference;
+                $params['ref'] = $message->reference;
             }
 
             if ($message->from && !$message->noFrom) {
