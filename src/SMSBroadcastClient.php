@@ -7,6 +7,8 @@ use GuzzleHttp\Client;
 use NotificationChannels\SMSBroadcast\Exceptions\CouldNotSendNotification;
 use NotificationChannels\SMSBroadcast\Events\MessageWasSent;
 use Illuminate\Support\ServiceProvider;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
 class SMSBroadcastClient
 {
@@ -15,6 +17,13 @@ class SMSBroadcastClient
     protected $password;
     private $afterSendCallback;
     protected $mock;
+
+    /**
+     * Logger instance
+     *
+     * @var Logger
+     */
+    private $logger;
 
     /**
      * SMSBroadcastClient constructor.
@@ -41,9 +50,15 @@ class SMSBroadcastClient
      */
     public function send(SMSBroadcastMessage $message)
     {
+        // Setup the log
+        $this->logger = new Logger('SMSBroadcastClient');
+        $this->logger->pushHandler(new StreamHandler(storage_path('logs/smsbroadcast.log')));
+        $this->logger->debug('Sending message');
+
         // Set the default from
         if (empty($message->from) && !$message->noFrom) {
             $message->setFrom(config('services.smsbroadcast.from'));
+            $this->logger->debug(sprintf('Set from to %s', $message->from));
         }
 
         // Set the default maximum split
@@ -73,11 +88,16 @@ class SMSBroadcastClient
                 $params['from'] = $message->from;
             }
 
+            $this->logger->debug('Posting params', $params);
+
             // Send the post request
             if (!$this->mock) {
                 $response = $this->client->request('POST', 'https://api.smsbroadcast.com.au/api-adv.php', [
                     'form_params' => $params,
                 ]);
+                $this->logger->debug('Posted to SMS Broadcast');
+            } else {
+                $this->logger->debug('Posted to mock');
             }
         } catch (Exception $exception) {
             throw CouldNotSendNotification::serviceRespondedWithAnError($exception->getMessage());
@@ -93,6 +113,8 @@ class SMSBroadcastClient
                 $response .= "OK:" . $recipient . ":" . "12345" . rand(100000, 999999) . "\n";
             }
         }
+
+        $this->logger->debug('Response: ' . $response);
 
         // Break up the response lines
         $responseLines = explode("\n", $response);
@@ -113,6 +135,7 @@ class SMSBroadcastClient
 
         // Call the event
         if (is_callable($this->afterSendCallback)) {
+            $this->logger->debug('Calling event callback');
             call_user_func_array($this->afterSendCallback, [$message, $responseData]);
         }
     }
