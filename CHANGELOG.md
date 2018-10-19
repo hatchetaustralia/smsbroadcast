@@ -2,6 +2,10 @@
 
 All notable changes to `smsbroadcast` will be documented in this file
 
+## 1.0.4 - 2018-010-19
+
+- Add support for Laravel 5.7
+
 ## 1.0.3 - 2018-08-13
 
 - Fix bug with ref key for SMS Broadcast
