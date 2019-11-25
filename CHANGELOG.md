@@ -2,7 +2,11 @@
 
 All notable changes to `smsbroadcast` will be documented in this file
 
-## 1.0.4 - 2018-010-19
+## 1.0.4 - 2019-11-25
+
+- Add support for Laravel 6.x and bump tag to 2.0
+
+## 1.0.4 - 2018-10-19
 
 - Add support for Laravel 5.7
 
