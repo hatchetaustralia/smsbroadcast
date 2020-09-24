@@ -37,7 +37,12 @@ class SMSBroadcastChannel
             $message = SMSBroadcastMessage::create($message);
         }
 
-        if ($to = $notifiable->routeNotificationFor('sms broadcast')) {
+        if (! $to = $notifiable->routeNotificationFor('sms broadcast')) {
+            // Fallback to using the driver name for anonymous notifiables
+            $to = $notifiable->routeNotificationFor('NotificationChannels\SMSBroadcast\SMSBroadcastChannel');
+        }
+
+        if ($to) {
             $message->setRecipients($to);
         }
 

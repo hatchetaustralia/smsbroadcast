@@ -96,7 +96,7 @@ class SMSBroadcastMessage
      * Set a reference for the message which will transmit to SMS Broadcast
      *
      * @param string $reference
-     * @return void
+     * @return $this
      */
     public function setReference($reference)
     {
@@ -108,12 +108,12 @@ class SMSBroadcastMessage
     /**
      * Set a private reference for the message that will not transmit to SMS Broadcast and can be used internally on events
      *
-     * @param string $reference
-     * @return void
+     * @param string $privateReference
+     * @return $this
      */
     public function setPrivateReference(string $privateReference)
     {
-        $this->privateReference = (string)$privateReference;
+        $this->privateReference = (string) $privateReference;
 
         return $this;
     }
@@ -122,7 +122,7 @@ class SMSBroadcastMessage
      * Set the maximum split of the message (maximum number of SMS credits to use per recipient)
      *
      * @param integer $maxSplit
-     * @return void
+     * @return $this
      */
     public function setMaxSplit(int $maxSplit = 1)
     {
@@ -135,7 +135,7 @@ class SMSBroadcastMessage
      * Set a delay when sending the message in minutes
      *
      * @param integer $delay in minutes
-     * @return void
+     * @return $this
      */
     public function setDelay(int $delay)
     {
