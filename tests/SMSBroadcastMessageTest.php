@@ -2,11 +2,18 @@
 
 namespace NotificationChannels\SMSBroadcast\Test;
 
+use Illuminate\Support\Facades\Log;
 use NotificationChannels\SMSBroadcast\SMSBroadcastMessage;
 use PHPUnit\Framework\TestCase;
 
 class SMSBroadcastMessageTest extends TestCase
-{
+{    
+    public function setUp(): void
+    {
+        Log::swap(new LogFake());
+        parent::setUp();
+    }
+
     /** @test */
     public function it_can_be_instantiated()
     {

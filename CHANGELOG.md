@@ -2,9 +2,15 @@
 
 All notable changes to `smsbroadcast` will be documented in this file
 
+## 3.0.0 - 2021-02-16
+
+- Add support for Laravel 8.x bumping versions
+- Corrections to some dodgy phpdoc declarations I made
+- Bump minimum PHP requirement to 7.4
+
 ## 2.0.1 - 2020-09-24
 
-- Add support for Laravel 7.x and 8.x (no changes needed)
+- Add support for Laravel 7.x (no changes needed)
 - Fix sending messages to AnonymousNotifiable classes
 
 ## 2.0.0 - 2019-11-25

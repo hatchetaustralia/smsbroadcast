@@ -1,10 +1,10 @@
-# SMS Broadcast notifications channel for Laravel 6
+# SMS Broadcast notifications channel for Laravel 8
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/hachetaustralia/smsbroadcast.svg?style=flat-square)](https://packagist.org/packages/hachetaustralia/smsbroadcast)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Total Downloads](https://img.shields.io/packagist/dt/hachetaustralia/smsbroadcast.svg?style=flat-square)](https://packagist.org/packages/hachetaustralia/smsbroadcast)
 
-This package makes it easy to send SMS Broadcast SMS notifications with Laravel 6.
+This package makes it easy to send SMS Broadcast SMS notifications with Laravel 8
 
 ## Contents
 
@@ -33,6 +33,7 @@ You can install the package via composer:
 composer require hachetaustralia/smsbroadcast
 ```
 
+for Laravel 6 and 7, please use the 2.x version of this package.
 for Laravel 5.8 or lower, please use the 1.x version of this package.
 
 ## Setting up your SMSBroadcast account

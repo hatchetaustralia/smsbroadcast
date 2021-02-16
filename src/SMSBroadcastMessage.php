@@ -17,9 +17,9 @@ class SMSBroadcastMessage
      * Create a new instance statically
      *
      * @param string $body
-     * @return void
+     * @return self
      */
-    public static function create($body = '')
+    public static function create($body = ''): self
     {
         return new static($body);
     }
@@ -31,7 +31,7 @@ class SMSBroadcastMessage
      */
     public function __construct($body = '')
     {
-        if (!empty($body)) {
+        if (! empty($body)) {
             $this->body = trim($body);
         }
     }
@@ -40,9 +40,9 @@ class SMSBroadcastMessage
      * Set the body of the message
      *
      * @param string $body
-     * @return void
+     * @return self
      */
-    public function setBody($body)
+    public function setBody($body): self
     {
         $this->body = trim($body);
 
@@ -53,9 +53,9 @@ class SMSBroadcastMessage
      * Set who the message should come from
      *
      * @param string $from
-     * @return void
+     * @return self
      */
-    public function setFrom($from)
+    public function setFrom($from): self
     {
         $this->from = $from;
 
@@ -66,9 +66,9 @@ class SMSBroadcastMessage
      * Set a flag to indicate that there should be no from address by default
      * This will use SMS Broadcast's two way SMS sending number
      *
-     * @return void
+     * @return self
      */
-    public function setNoFrom()
+    public function setNoFrom(): self
     {
         $this->noFrom = true;
 
@@ -79,9 +79,9 @@ class SMSBroadcastMessage
      * Set the recipients to the message
      *
      * @param string|array $recipients
-     * @return void
+     * @return self
      */
-    public function setRecipients($recipients)
+    public function setRecipients($recipients): self
     {
         if (is_array($recipients)) {
             $recipients = implode(',', $recipients);
@@ -96,9 +96,9 @@ class SMSBroadcastMessage
      * Set a reference for the message which will transmit to SMS Broadcast
      *
      * @param string $reference
-     * @return $this
+     * @return self
      */
-    public function setReference($reference)
+    public function setReference($reference): self
     {
         $this->reference = substr($reference, 0, 20);
 
@@ -109,9 +109,9 @@ class SMSBroadcastMessage
      * Set a private reference for the message that will not transmit to SMS Broadcast and can be used internally on events
      *
      * @param string $privateReference
-     * @return $this
+     * @return self
      */
-    public function setPrivateReference(string $privateReference)
+    public function setPrivateReference(string $privateReference): self
     {
         $this->privateReference = (string) $privateReference;
 
@@ -122,9 +122,9 @@ class SMSBroadcastMessage
      * Set the maximum split of the message (maximum number of SMS credits to use per recipient)
      *
      * @param integer $maxSplit
-     * @return $this
+     * @return self
      */
-    public function setMaxSplit(int $maxSplit = 1)
+    public function setMaxSplit(int $maxSplit = 1): self
     {
         $this->maxSplit = (int)$maxSplit;
 
@@ -135,9 +135,9 @@ class SMSBroadcastMessage
      * Set a delay when sending the message in minutes
      *
      * @param integer $delay in minutes
-     * @return $this
+     * @return self
      */
-    public function setDelay(int $delay)
+    public function setDelay(int $delay): self
     {
         $this->delay = (int)$delay;
 
