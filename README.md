@@ -11,6 +11,7 @@ This package makes it easy to send SMS Broadcast SMS notifications with Laravel 
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Setting up your SMSBroadcast account](#setting-up-your-smsbroadcast-account)
+- [Using a custom logging channel](#using-a-custom-logging-channel)
 - [Usage](#usage)
     - [Available methods](#available-methods)
     - [Available events](#available-events)
@@ -101,6 +102,26 @@ class User extends Authenticatable
         return [ $this->mobile_primary, $this->mobile_secondary ];
     }
 }
+```
+
+## Using a Custom Logging Channel
+Debug logs will automatically use your default logging channel, however you can specify a custom logging channel by adding the following to your `config/services.php` file:
+
+``` php
+// config/services.php
+...
+'smsbroadcast' => [
+    'logging_channel' => env('SMSBROADCAST_LOGGING_CHANNEL'),
+]
+...
+```
+
+And the following to your `.env` file
+``` php
+// .env
+...
+SMSBROADCAST_LOGGING_CHANNEL=
+...
 ```
 
 ## Usage

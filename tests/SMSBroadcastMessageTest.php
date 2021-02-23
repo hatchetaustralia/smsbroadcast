@@ -7,7 +7,7 @@ use NotificationChannels\SMSBroadcast\SMSBroadcastMessage;
 use PHPUnit\Framework\TestCase;
 
 class SMSBroadcastMessageTest extends TestCase
-{    
+{
     public function setUp(): void
     {
         Log::swap(new LogFake());
