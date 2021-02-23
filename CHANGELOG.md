@@ -2,6 +2,10 @@
 
 All notable changes to `smsbroadcast` will be documented in this file
 
+## 3.0.1 - 2021-02-23
+
+- Merge PR 1
+
 ## 3.0.0 - 2021-02-16
 
 - Add support for Laravel 8.x bumping versions

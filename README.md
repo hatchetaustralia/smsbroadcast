@@ -237,6 +237,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 ## Credits
 
 - [Hatchet](https://hatchet.com.au)
+- [glennforrest](https://github.com/glennforrest/)
 
 ## License
 
